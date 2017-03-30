@@ -1,0 +1,282 @@
+//Attached: HW_3a, 3b, 3c
+//==================================================
+//Project: HW_3b
+//==================================================
+//Programmer: Wilman Garcia
+//Class: CIS 17C
+//==================================================
+
+#include "SortedList.h"
+
+void showMenu();
+char getChoice();
+
+int main()
+{
+	int value;
+	char choice;
+	SortedList list;
+
+	do {
+
+		showMenu();
+		choice = getChoice();
+
+		switch (toupper(choice))
+		{
+		case 'A':
+			cout << "Enter a number: ";
+			cin >> value;
+			if (list.isFull())
+			{
+				cout << "The list is full - Cannot insert the number." << endl << endl;
+			}
+			else {
+				list.insertItem(value);
+				cout << endl;
+			}
+			break;
+
+		case 'B':
+			cout << "Enter a number to be deleted: ";
+			cin >> value;
+			if (list.isEmpty())
+			{
+				cout << "The list is empty" << endl;
+			}
+			else {
+				list.deleteItem(value);
+			}
+			break;
+		}
+	} while (toupper(choice) != 'C');
+
+	list.display();
+
+	return 0;
+}
+//==================================================
+
+void showMenu() {
+	cout << "a. Insert a number into  the list." << endl;
+	cout << "b. Delete a number from the list." << endl << endl;
+}
+//==================================================
+
+char getChoice()
+{
+	char choice;
+	cout << "Enter your choice (C to quit): ";
+	cin >> choice;
+
+	return choice;
+}
+//==================================================
+
+//SortedList.h
+
+#include <iostream>
+#include <cstdlib>
+using namespace std;
+const int MAX_SIZE = 10;
+
+class SortedList
+{
+private:
+	int numbers[MAX_SIZE];
+	int length = 0;
+
+public:
+	SortedList();
+	~SortedList();
+	void insertItem(int);
+	void deleteItem(int);
+	bool isFull() const;
+	bool isEmpty() const;
+	int linearSearch(int);
+	int binarySearch(int);
+};
+//==================================================
+
+//SortedList.cpp
+
+#include "SortedList.h"
+
+SortedList::SortedList()
+{
+}
+
+
+SortedList::~SortedList()
+{
+}
+
+void SortedList::insertItem(int value)
+{
+	int location = 0;
+	location = linearSearch(value);
+
+	for (int i = length; i > location; i--)
+	{
+		numbers[i] = numbers[i - 1];
+	}
+	numbers[location] = value;
+	length++;
+}
+
+void SortedList::deleteItem(int item)
+{
+	int location = 0;
+
+	location = binarySearch(item);
+	
+	if (location < length)
+	{
+		for (int i = location + 1; i < length; i++)
+		{
+			numbers[i - 1] = numbers[i];
+		}
+
+		cout << "Item has been deleted" << endl << endl;
+		length--;
+	}
+	else
+		cout << "The number is not in the list." << endl << endl;
+}
+
+bool SortedList::isFull() const
+{
+	return (length == MAX_SIZE);
+}
+
+bool SortedList::isEmpty() const
+{
+	return (length == 0);
+}
+
+int SortedList::linearSearch(int item)
+{
+	int location = 0;
+	while ((item >= numbers[location]) && (location < length))
+	{
+		location++;
+	}
+
+	return location;
+}
+
+int SortedList::binarySearch(int item)
+{
+	int first = 0;
+	int midpoint = 0;
+	int last = length - 1;
+
+	while (true)
+	{
+		if (first > last)
+		{
+			return first;
+		}
+
+		midpoint = (first + last) / 2;
+
+		if (item == numbers[midpoint])
+		{
+			return midpoint;
+		}
+
+		else if (item > numbers[midpoint])
+		{
+			first = (midpoint + 1);
+		}
+
+		else if (item < numbers[midpoint])
+		{
+			last = (midpoint - 1);
+		}
+	}
+}
+//==================================================
+
+/*Output
+
+a. Insert a number into  the list.
+b. Delete a number from the list.
+
+Enter your choice (C to quit): a
+Enter a number: 100
+
+a. Insert a number into  the list.
+b. Delete a number from the list.
+
+Enter your choice (C to quit): a
+Enter a number: 200
+
+a. Insert a number into  the list.
+b. Delete a number from the list.
+
+Enter your choice (C to quit): a
+Enter a number: 3
+
+a. Insert a number into  the list.
+b. Delete a number from the list.
+
+Enter your choice (C to quit): a
+Enter a number: 4
+
+a. Insert a number into  the list.
+b. Delete a number from the list.
+
+Enter your choice (C to quit): a
+Enter a number: 500
+
+a. Insert a number into  the list.
+b. Delete a number from the list.
+
+Enter your choice (C to quit): a
+Enter a number: 600
+
+a. Insert a number into  the list.
+b. Delete a number from the list.
+
+Enter your choice (C to quit): a
+Enter a number: 700
+
+a. Insert a number into  the list.
+b. Delete a number from the list.
+
+Enter your choice (C to quit): a
+Enter a number: 800
+
+a. Insert a number into  the list.
+b. Delete a number from the list.
+
+Enter your choice (C to quit): a
+Enter a number: 900
+
+a. Insert a number into  the list.
+b. Delete a number from the list.
+
+Enter your choice (C to quit): a
+Enter a number: 10000
+
+a. Insert a number into  the list.
+b. Delete a number from the list.
+
+Enter your choice (C to quit): a
+Enter a number: 11
+The list is full - Cannot insert the number.
+
+a. Insert a number into  the list.
+b. Delete a number from the list.
+
+Enter your choice (C to quit): b
+Enter a number to be deleted: 100
+Item has been deleted
+
+a. Insert a number into  the list.
+b. Delete a number from the list.
+
+Enter your choice (C to quit): C
+Press any key to continue . . .
+//==================================================

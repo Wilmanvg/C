@@ -1,0 +1,12 @@
+**************************************************
+* PROGRAMMED BY : Wilman Garcia
+* CLASS         : CSC5
+* SECTION       : TTh 6PM - 9:10PM
+* ASSIGNMENT #3 : Functions
+**************************************************
+
+ID #     NAME                     BALANCE DUE
+----     --------------------     -----------
+1006     Sally Sleeper            $     32.36
+
+             Average Balance Due: $     30.00

@@ -1,0 +1,38 @@
+// ===========================================================
+// ===========================================================
+#include<iostream>
+#include<string>
+#include<map>
+using namespace std;
+
+int main() {
+	map<string, string> contactPerson;
+
+	contactPerson["Wolkswagon of America"] = " I.B. Cheaton";
+	contactPerson["Wells Fargo Bank"] = " Ima Swindler";
+	contactPerson["Chipotle Mexican Grill"] = "E. Coli";
+	contactPerson["Takata Inc"] = "I.X. Plodum";
+
+	// displaying.
+	for (map<string, string>::iterator it = contactPerson.begin(); it != contactPerson.end(); it++) {
+		cout << (*it).first << ": " << (*it).second << endl;
+	}
+
+	// inserting one more contact
+	contactPerson.insert(pair<string, string>("In N Out", " Rhed Nek"));
+
+	// displaying again.
+	for (map<string, string>::iterator it = contactPerson.begin(); it != contactPerson.end(); it++) {
+		cout << (*it).first << ": " << (*it).second << endl;
+	}
+
+	return 0;
+}
+// ===========================================================
+// ===========================================================
+
+// ===========================================================
+// ===========================================================
+
+// ===========================================================
+// ===========================================================

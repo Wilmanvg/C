@@ -1,0 +1,100 @@
+/**************************************************
+* PROGRAMMED BY : Wilman Garcia
+* CLASS : CIS 17C
+* SECTION : MW 2:30PM - 3:55PM
+* ASSIGNMENT: HW1
+* ATTACHED: HW1
+**************************************************/
+
+#include "stdafx.h"
+#include <iostream>
+#include <fstream>
+using namespace std;
+
+//Function Prototypes 
+void getNumbers(int[], int);
+void showNumbers(int[], int);
+
+int main()
+{
+	const int SIZE = 20;				//Initializes the size of the array
+	int numbers[SIZE];					//Initializes the array with a size of 20
+
+	//For loop runs through every element in the array and set it = to 0
+	for (int i = 0; i < SIZE; i++)
+	{
+		numbers[i] = 0;
+	}
+
+	//Calls the function getNumbers and passes the arguments numbers which is an array and the size of the array
+	getNumbers(numbers, SIZE);
+
+	//Calls the function showNumbers and passes the arguments numbers which is an array and the size of the array
+	showNumbers(numbers, SIZE);
+
+	return 0;
+}
+
+void getNumbers(int numbers[], int SIZE)
+{
+	ifstream inputFile;				//Creates ifstream object
+	inputFile.open("data.txt");		//Opens data.txt file
+
+	//While the file is not at the end of the file it reads its contents into the array
+	while (!inputFile.eof())
+	{
+		for (int i = 0; i < SIZE; i++)
+		{
+			inputFile >> numbers[i];
+
+		}
+	}
+}
+
+void showNumbers(int numbers[], int SIZE)
+{
+	//Runs through the array when the element is not set to 0
+	for (int i = 0; i < SIZE; i++)
+	{
+		if (numbers[i] != NULL)
+		{
+			cout << numbers[i] << endl;
+		}
+
+		else
+		{
+
+		}
+
+	}
+}
+
+
+/*OUTPUT
+1
+2
+3
+4
+5
+6
+7
+38
+80
+39
+Press any key to continue . . .
+*/
+
+
+/*DATA.TXT FILE
+
+1
+2
+3
+4
+5
+6
+7
+38
+80
+39
+*/

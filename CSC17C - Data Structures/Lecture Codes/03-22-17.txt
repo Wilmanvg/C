@@ -1,0 +1,82 @@
+#include<iostream>
+#include<vector>
+using namespace std;
+void displayList(vector<int>);
+int main() {
+
+	vector<int>firstList{ 1,2,3,4,5,6,7,8,9,0 };
+	vector<int>secondList{ 0,9,8,7,6,5,4,3,2,1 };
+	
+	cout << "Displaying both lists:\n";
+	
+	displayList(firstList);
+	displayList(secondList);
+
+	cout << "\nSwapping all numbers on their prespective lists.\n";
+	firstList.swap(secondList);
+	displayList(firstList);
+	swap(firstList, secondList);
+	cout << "Displaying second List.\n";
+	displayList(secondList);
+
+	cout << "Swapping 3rd number from each list.\n";
+	swap(firstList[2], secondList[5]);
+	displayList(firstList);
+}
+
+void displayList(vector<int> List) {
+	for (vector<int>::iterator it = List.begin(); it != List.end(); it++) {
+		cout << *it << " ";
+	}
+
+}
+
+// ======================================================
+
+#include<iostream>
+#include<vector>
+using namespace std;
+void displayList(vector<int>);
+int main() {
+
+	vector<int>firstList{ 1,2,3,4,5,6,7,8,9,0 };
+	vector<int>secondList{ 0,9,8,7,6,5,4,3,2,1 };
+	vector<int>thirdList;
+
+
+	thirdList.push_back(1);
+	thirdList.push_back(2);
+	thirdList.push_back(4);
+
+	cout << thirdList.size() << endl;
+
+	thirdList.push_back(10);
+	
+	thirdList.insert(thirdList.begin(), 3);
+
+	displayList(thirdList); 
+
+	cout << endl;
+
+	thirdList.erase(thirdList.begin() + 4);
+	displayList(thirdList);
+
+	cout << thirdList.size();
+	
+	
+
+}
+
+void displayList(vector<int> List) {
+	for (vector<int>::iterator it = List.begin(); it != List.end(); it++) {
+		cout << *it << " ";
+	}
+
+	// Other way to loop through
+
+	//for (int i = 0; i < List.size(); i++)
+	//{
+	//	cout << List[i];
+	//}
+
+}

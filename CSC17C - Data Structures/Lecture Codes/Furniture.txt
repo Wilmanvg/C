@@ -1,0 +1,133 @@
+// Furniture.h
+
+#pragma once
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Furniture
+{
+private:
+	int id;
+	string name;
+	float price;
+public:
+	Furniture();	// default constructor (no parameters)
+	Furniture(int id, string name, float price);
+	~Furniture();
+
+	// set functions are modifier functions
+	void setID(int id);
+	void setName(string name);
+	void setPrice(float price);
+
+	// get funtions are accessor functions
+	float getPrice()const;
+	void display()const;
+
+	bool operator<(float amt);
+};
+// ======================================
+// Furniture.cpp
+
+#include "Furniture.h"
+
+Furniture::Furniture()
+{
+//	this->id = 0;
+//	this->name = "";
+//	this->price = 0;
+
+	id = 0;
+	name = "";
+	price = 0;
+}
+// ---------------------
+Furniture::Furniture(int id, string name, float price)
+{
+	this->id = id;
+	this->name = name;
+	this->price = price;
+}
+// ---------------------
+Furniture::~Furniture() {}
+// ---------------------
+void Furniture::setID(int id)
+{
+	this->id = id;
+}
+// ---------------------
+void Furniture::setName(string name)
+{
+	this->name = name;
+}
+void Furniture::setPrice(float price)
+{
+	this->price = price;
+}
+// ---------------------
+float Furniture::getPrice()const
+{
+	return price;
+}
+// ---------------------
+void Furniture::display()const
+{
+	cout << "ID:  " << id << endl
+		<< "Name:  " << name << endl
+		<< "Price:  " << price << endl << endl;
+}
+// ---------------------
+bool Furniture::operator<(float amt)
+{
+	if (price < amt)
+		return true;
+	else
+		return false;
+}
+// ======================================
+// main.cpp
+
+#include "Furniture.h"
+
+int main()
+{
+	int idNum;
+	string furnName;
+	float retailPrice;
+	Furniture f1;
+	Furniture f2(100, "Nightstand", 125.50);
+
+	cout << "F1:\n";
+	f1.display();
+
+	cout << "\n\nF2:  ";
+	f2.display();
+
+	cout << "Enter F1:\n"
+		<< "ID:  ";
+	cin >> idNum;
+	cin.ignore();
+	cout << "Name:  ";
+	getline(cin, furnName);
+	cout << "Retail price:  ";
+	cin >> retailPrice;
+
+	f1.setID(idNum);
+	f1.setName(furnName);
+	f1.setPrice(retailPrice);
+
+	cout << "Here is F1 after the set functions...\n\n";
+	f1.display();
+
+	cout << "F1's price:  ";
+	cout << f1.getPrice() << endl << endl;
+
+	if (f1 < 100)
+		cout << "F1 is less than $100.\n\n";
+	else
+		cout << "Not less.\n\n";
+
+	return 0;
+}

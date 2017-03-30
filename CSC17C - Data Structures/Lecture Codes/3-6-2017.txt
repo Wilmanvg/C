@@ -1,0 +1,126 @@
+#include "UList.h"
+
+int main()
+{
+	UList list;
+	int id; 
+	char choice;
+
+	do
+	{
+		cout << "Please choose from the following menu options" << endl << endl;
+		cout << "a. Insert an ID" << endl;
+		cout << "b. Delete an ID" << endl << endl;
+
+		cout << "Enter a choice:";
+		cin >> choice; 
+
+		if (toupper(choice) == 'A')
+		{
+			cout << "Enter an id: ";
+			cin >> id;
+			if (list.isEmpty() == false)
+			{
+				list.insertItem(id);
+			}
+		}
+
+		else if (toupper(choice) == 'B')
+		{
+			cout << "Enter an idem to be deleted: ";
+			cin >> id;
+			list.deleteItem(id);
+		}
+	} while (toupper(choice) != 'C');
+
+	cout << "Displaying the list:" << endl;
+	list.displayList();
+
+	return 0;
+
+}
+
+//UList.h
+
+#include <iostream>
+using namespace std;
+#pragma once
+
+const int SIZE = 100;
+class UList
+{
+private:
+	int length = 0;
+	int idNumbers[SIZE];
+public:
+	UList();
+	~UList();
+	void insertItem(int id);
+	void deleteItem(int id);
+	bool isFull();
+	bool isEmpty();
+	void displayList();
+};
+
+//UList.cpp
+
+#include "UList.h"
+
+
+UList::UList()
+{
+	length = 0;
+}
+
+
+UList::~UList()
+{
+}
+
+void UList::insertItem(int id)
+{
+	idNumbers[length] = id;
+	length++;
+}
+
+void UList::deleteItem(int id)
+{
+	int location = 0;
+	while (id != idNumbers[location] && location < length)
+	{
+		location++;
+	}
+
+	if (location < length)
+	{
+		idNumbers[location] = idNumbers[length - 1];
+		cout << "Item has been deleted" << endl << endl;
+		length--;
+	}
+
+	else if (location == length)
+	{
+		cout << "Item is not in the list" << endl;
+	}
+
+}
+
+bool UList::isFull()
+{
+	return (length == SIZE);
+}
+
+bool UList::isEmpty()
+{
+	return (length == SIZE);
+}
+
+void UList::displayList()
+{
+	for (int i = 0; i < length; i++)
+	{
+		cout << idNumbers[i] << endl;
+	}
+}
+
+

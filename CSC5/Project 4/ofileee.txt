@@ -1,0 +1,4 @@
+ID #     NAME                     BALANCE DUE
+----     --------------------     -----------
+1006     Sally Sleeper            $     32.36
+

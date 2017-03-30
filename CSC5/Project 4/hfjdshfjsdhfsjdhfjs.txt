@@ -1,0 +1,15 @@
+**************************************************
+* PROGRAMMED BY : Wilman Garcia
+* CLASS         : CSC5
+* SECTION       : TTh 6PM - 9:10PM
+* ASSIGNMENT #3 : Functions
+**************************************************
+
+ID #     NAME                     BALANCE DUE
+----     --------------------     -----------
+1006     Sally Sleeper            $     32.36
+1008     Chris Carrol             $     32.36
+1009     Lisa Covi                $    332.36
+1007     Pete McBride             $    500.32
+
+             Average Balance Due: $    224.00

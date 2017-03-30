@@ -1,0 +1,43 @@
+#include <iostream>
+#include <string>
+#include <map>
+using namespace std;
+
+void enterGrades(map<string, char>&);
+void displayGrades(map < string, char>);
+int main()
+{
+	map<string, char> grades;
+
+	enterGrades(grades);
+	displayGrades(grades);
+
+}
+
+void enterGrades(map<string, char>& grades)
+{
+	char answer;
+	string studentName;
+	char grade;
+	do {
+
+		cout << "Enter a students name: ";
+		getline(cin, studentName);
+		cout << "Enter the students grade: ";
+		cin >> grade;
+		cout << "Would you like to enter another student? (Y/N): ";
+
+		grades[studentName] = grade;
+		cin >> answer;
+		cin.ignore();
+		
+	} while (toupper(answer) == 'Y');
+}
+
+void displayGrades(map<string, char> grades)
+{
+	for (map<string, char>::iterator it = grades.begin(); it != grades.end(); ++it)
+	{
+		cout << "Student: " << (*it).first << endl << "Grade: " << (*it).second << endl;
+	}
+}

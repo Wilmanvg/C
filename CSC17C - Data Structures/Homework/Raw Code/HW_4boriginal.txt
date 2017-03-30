@@ -1,0 +1,147 @@
+//Main
+#include "Employee.h"
+
+int main()
+{
+	Employee list;
+	int userNum;
+	char choice;
+
+	list.insertItem(2611300, "Willy");
+	list.insertItem(9999999, "Tony");
+	list.insertItem(1112121, "Kelvin");
+
+	cout << "Heer is the current employee list: " << endl << endl;
+
+	list.displayList();
+
+	cout << "Would you like to delete an employee from the lisT? (Y/N): ";
+	cin >> choice;
+
+	if (toupper(choice) == 'Y')
+	{
+		cout << "Enter the id number of who you would like to delete: ";
+		cin >> userNum;
+		list.deleteItem(userNum);
+	}
+
+	cout << "Here is the new list of employees: " << endl << endl;
+	list.displayList();
+}
+
+//Employee.h
+
+#pragma once
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Employee
+{
+private:
+	struct ListNode 
+	{
+		int id;
+		string name;
+		ListNode* next;
+	};
+
+	ListNode *head;
+public:
+	Employee()
+	{
+		head = nullptr;
+	}
+	~Employee();
+
+	//Linked List Operations
+	void insertItem(int, string);
+	void deleteItem(int);
+	void displayList() const;
+};
+
+//Employee.cpp
+#include "Employee.h"
+
+Employee::~Employee()
+{
+}
+
+void Employee::insertItem(int id, string name)
+{
+	ListNode *newNode;
+	ListNode *nodePtr;
+
+	newNode = new ListNode;
+	newNode->id = id;
+	newNode->name = name;
+	newNode->next = nullptr;
+
+	if (!head)
+		head = newNode;
+	else
+	{
+		nodePtr = head;
+
+		while (nodePtr->next)
+			nodePtr = nodePtr->next;
+
+		nodePtr->next = newNode;
+	}
+	
+}
+
+
+void Employee::deleteItem(int id)
+{
+	ListNode *nodePtr; 
+	ListNode *previousNode = nullptr;
+
+	//If the list is empty do nothing
+	if (!head)
+		return;	
+
+	if (head->id == id)
+	{
+		nodePtr = head->next;
+		delete head;
+		head = nodePtr;
+	}
+
+	else
+	{
+		//Initialize nodePtr to head of list
+
+		nodePtr = head;
+
+		while (nodePtr != nullptr && nodePtr->id != id)
+		{
+			previousNode = nodePtr;
+			nodePtr = nodePtr->next;
+		}
+
+		/*If nodePtr is not at the end of the list, link the previous node to the node after nodePtr, then delete nodePtr*/
+		if (nodePtr)
+		{
+			previousNode->next = nodePtr->next;
+			delete nodePtr;
+		}
+	}
+}
+
+void Employee::displayList() const
+{
+	ListNode *nodePtr;
+
+	nodePtr = head;
+
+	while (nodePtr)
+	{
+		cout << nodePtr->id << endl;
+		cout << nodePtr->name << endl;
+
+		nodePtr = nodePtr->next;
+	}
+}
+
+

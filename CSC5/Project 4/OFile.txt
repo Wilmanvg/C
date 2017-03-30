@@ -1,0 +1,37 @@
+**************************************************
+* PROGRAMMED BY : Wilman Garcia
+* CLASS         : CSC5
+* SECTION       : TTh 6PM - 9:10PM
+* ASSIGNMENT #3 : Functions
+**************************************************
+
+ID #     NAME                     BALANCE DUE
+----     --------------------     -----------
+1375     Garnet Burrell           $     76.55
+
+             Average Balance Due: $     76.005521     Mariko Caddell           $     45.98
+
+             Average Balance Due: $     60.007814     Kazuko Dworkin           $    579.76
+
+             Average Balance Due: $    233.003820     Sal Earnhardt            $    237.41
+
+             Average Balance Due: $    234.007842     Faith Ertle              $    291.00
+
+             Average Balance Due: $    245.00
+             Average Balance Due: $    245.00
+             Average Balance Due: $    245.001000     Daren Hellickson         $    547.42
+
+             Average Balance Due: $    295.00
+             Average Balance Due: $    295.004532     Eliz Maranto             $     12.99
+
+             Average Balance Due: $    255.00
+             Average Balance Due: $    255.002310     Cassondra Ohman          $     77.52
+
+             Average Balance Due: $    233.00
+             Average Balance Due: $    233.00
+             Average Balance Due: $    233.001092     Leia Skelley             $     27.95
+
+             Average Balance Due: $    210.00
+             Average Balance Due: $    210.002092     Estelle Vanzant          $    822.56
+
+             Average Balance Due: $    271.00

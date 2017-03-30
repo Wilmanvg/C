@@ -1,0 +1,232 @@
+//Attached: HW_4a, HW_4b
+//==================================================
+//Project: HW_4b
+//==================================================
+//Programmer: Wilman Garcia
+//Class: CIS 17C
+//Instructor: Dennis Rainey
+//
+//Description:
+//	This program uses a class to create a link lis tof employees. The user is promopted to enter empoloyee id's and employee names
+//	that are then passed to the insert item method in the Employee class which adds the value to the list. The user is then asked if they
+//	would like to display the list and tehn they are asked if they would like to delete an employee off of the list.
+//
+//	The formatting of the list done so that the the standart ID Number is 7 digits long.
+//	I.E. 2611300
+//==================================================
+
+#include "Employee.h"
+
+int main()
+{
+	Employee list;
+	int userNum;
+	string userName;
+	char choice;
+
+	do {
+		cout << "Enter an employee id (0 to quit): ";
+		cin >> userNum;
+		cin.ignore();
+		if (userNum != 0)
+		{
+			cout << "Enter an employee name (*to quit): ";
+			getline(cin, userName);
+		}
+		if (userNum != 0 && userName != "*")
+		{
+			list.insertItem(userNum, userName);
+		}
+
+	} while (userNum != 0 && userName != "*");
+	cout << "Would you like to display the Employee list? (Y/N): ";
+	cin >> choice;
+	system("CLS");
+
+	if (toupper(choice) == 'Y')
+	{
+		cout << "Heer is the current employee list: " << endl << endl;
+
+		list.displayList();
+	}
+
+	cout << "Would you like to delete an employee from the lisT? (Y/N): ";
+	cin >> choice;
+
+	if (toupper(choice) == 'Y')
+	{
+		cout << "Enter the id number of who you would like to delete: ";
+		cin >> userNum;
+		list.deleteItem(userNum);
+		cout << "Here is the new list of employees: " << endl << endl;
+		list.displayList();
+	}
+
+}
+
+//==================================================
+
+//Employee.h
+
+#pragma once
+#include <iostream>
+#include <string>
+#include <cstdlib>
+#include <iomanip>
+using namespace std;
+
+class Employee
+{
+private:
+	struct ListNode 
+	{
+		int id;
+		string name;
+		ListNode* next;
+	};
+
+	ListNode *head;
+public:
+	Employee()
+	{
+		head = nullptr;
+	}
+	~Employee();
+
+	//Linked List Operations
+	void insertItem(int, string);
+	void deleteItem(int);
+	void displayList() const;
+};
+//==================================================
+
+//Employee.cpp
+
+#include "Employee.h"
+
+Employee::~Employee()
+{
+}
+
+void Employee::insertItem(int id, string name)
+{
+	ListNode *newNode;
+	ListNode *nodePtr;
+
+	newNode = new ListNode;
+	newNode->id = id;
+	newNode->name = name;
+	newNode->next = nullptr;
+
+	if (!head)
+		head = newNode;
+	else
+	{
+		nodePtr = head;
+
+		while (nodePtr->next)
+			nodePtr = nodePtr->next;
+
+		nodePtr->next = newNode;
+	}
+	
+}
+
+
+void Employee::deleteItem(int id)
+{
+	ListNode *nodePtr; 
+	ListNode *previousNode = nullptr;
+
+	//If the list is empty do nothing
+	if (!head)
+		return;	
+
+	if (head->id == id)
+	{
+		nodePtr = head->next;
+		delete head;
+		head = nodePtr;
+	}
+
+	else
+	{
+		//Initialize nodePtr to head of list
+
+		nodePtr = head;
+
+		while (nodePtr != nullptr && nodePtr->id != id)
+		{
+			previousNode = nodePtr;
+			nodePtr = nodePtr->next;
+		}
+
+		/*If nodePtr is not at the end of the list, link the previous node to the node after nodePtr, then delete nodePtr*/
+		if (nodePtr)
+		{
+			previousNode->next = nodePtr->next;
+			delete nodePtr;
+		}
+	}
+}
+
+void Employee::displayList() const
+{
+	ListNode *nodePtr;
+	int location = 0;
+
+	nodePtr = head;
+
+
+	cout << "LIST OF EMPLOYEES" << endl << endl;
+	cout << setw(10) << "ID" << setw(23) << "NAME" << endl;
+	cout << "----------------------------------------------------" << endl;
+
+	while (nodePtr)
+	{
+		location++;
+		cout << location << left << setw(7) << ".)" << nodePtr->id << right << setw(7) << "-" << left << setw(7) << "-" << nodePtr->name << endl;
+
+		nodePtr = nodePtr->next;
+	}
+}
+
+//==================================================
+
+/*OUTPUT
+
+Enter an employee id (0 to quit): 2611300
+Enter an employee name (*to quit): Wilman Garcia
+Enter an employee id (0 to quit): 1234567
+Enter an employee name (*to quit): Tony
+Enter an employee id (0 to quit): 5637987
+Enter an employee name (*to quit): Kelvin
+Enter an employee id (0 to quit): 7125347
+Enter an employee name (*to quit): Robert
+Enter an employee id (0 to quit): 0
+Would you like to display the Employee list? (Y/N): y
+
+//----screen clears----
+
+LIST OF EMPLOYEES
+
+        ID                   NAME
+----------------------------------------------------
+1.)     2611300      --      Wilman Garcia
+2.)     1234567      --      Tony
+3.)     5637987      --      Kelvin
+4.)     7125347      --      Robert
+Would you like to delete an employee from the lisT? (Y/N): y
+Enter the id number of who you would like to delete: 1234567
+Here is the new list of employees:
+
+LIST OF EMPLOYEES
+
+ID        NAME
+----------------------------------------------------
+1.)     2611300      --      Wilman Garcia
+2.)     5637987      --      Kelvin
+3.)     7125347      --      Robert
+Press any key to continue . . .
+
+
